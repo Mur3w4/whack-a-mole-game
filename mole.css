@@ -38,3 +38,21 @@ body{
     -ms-user-select: none;
 
 }
+
+#pause{
+    background-color: greenyellow;
+    border-radius: 6px;
+}
+#pause:hover{
+    background-color: green;
+    cursor: pointer;
+}
+
+#restart{
+    background-color:orange;
+    border-radius: 6px;
+}
+#restart:hover{
+    background-color:red;
+    cursor: pointer;
+}
