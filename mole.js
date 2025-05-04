@@ -2,6 +2,7 @@ let currMoleTile;
 let currPlantTile;
 let score = 0;
 let gameOver = false;
+let pause;
 
 let moleInterval;
 let plantInterval;
@@ -72,7 +73,7 @@ function setPlant() {
 }
 
 function selectTile() {
-    if (gameOver) {
+    if (gameOver || pause) {
         return;
     }
 
@@ -87,4 +88,36 @@ function selectTile() {
         clearInterval(moleInterval);
         clearInterval(plantInterval);
     }
+}
+
+function togglePause() {
+    if (gameOver)return;
+    pause = !pause;
+
+    if (pause){
+        clearInterval(moleInterval)
+        clearInterval(plantInterval)
+        document.getElementById("controls").children[0].innerText = "Resume";
+    }
+    else{
+        moleInterval = setInterval(setMole, 1000);
+        plantInterval = setInterval(setPlant, 2000);
+        document.getElementById("controls").children[0].innerText = "Pause";
+    }
+}
+
+function restartGame() {
+    score = 0;
+    gameOver = false;
+    document.getElementById("score").innerText = score.toString();
+
+    for (let i = 0; 1 < 9; i++) {
+        document.getElementById(i.toString()).innerHTML = "";}
+
+        clearInterval(moleInterval);
+        clearInterval(plantInterval);
+        moleInterval = setInterval(setMole, 1000);
+        plantInterval = setInterval(setPlant, 2000);
+
+        document.getElementById("controls").children[0].innerText = pause;
 }
